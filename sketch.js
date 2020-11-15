@@ -1,15 +1,4 @@
-// Create a new word2vec method
-const wv = ml5.word2vec('data/word2vec1000.json', modelLoaded);
-
-// When the model is loaded
-function modelLoaded() {
-  console.log('Model Loaded!');
-}
-
-// Find the closest word to 'rainbow'
-wordVectors.nearest('dog', (err, results) => {
-  console.log(results);
-});
+var v = "dog";
 
 function nearest(w) {
     return wv.nearest(w, 100, (e, r) => {
@@ -21,6 +10,27 @@ function nearest(w) {
     });
 }
 
-function asto(s1, s2, t1) {
-    // Returns t2 for t1, which is s2 for s1
+function a(t) {
+    var e = document.createElement("div");
+    e.innerText = t;
+    d = document.getElementById("main");
+    d.insertBefore(e, d.firstChild);
+}
+
+window.onload = () => {
+    a("Loading model...");
+    wv = ml5.word2vec('data/word2vec1000.json', ()=> {
+        setInterval(ar, 1000);
+    });
+};
+
+function ar() {
+    a(v);
+    wv.nearest(v, 3, (e, rs) => {
+        for (var r of rs) {
+            a(JSON.stringify(r));
+        }
+        v = _.sample(rs).word;
+        console.log(v);
+    });
 }
